@@ -13,7 +13,7 @@ O teste consiste em criar uma aplicação com Java que expõe uma API REST com r
 <p align="center">
   <img width="260" src="diagrama.png">
 </p>
-> Acima abaixo o diagrama com as classes.
+> Acima o diagrama com as classes.
 
 ### Front-end
 O front-end deve apresentar pelo menos os seguintes requisitos:
