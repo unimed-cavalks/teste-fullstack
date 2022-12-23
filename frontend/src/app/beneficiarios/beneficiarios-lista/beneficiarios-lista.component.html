@@ -1,0 +1,77 @@
+<h1 class="mt-4">Beneficiários</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="container">
+    <div class="col-md-12">
+        <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+           {{ mensagemSucesso }}
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+            {{ mensagemErro }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)="novoCadastro()"><i class="fa fa-plus"></i>
+            Novo
+            </button>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover" >
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>CPF</th>
+                        <th>EMAIL</th>
+                        <th>IDADE</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let beneficiario of beneficiarios; let i = index;"> 
+                        <td>{{beneficiario.id}}</td>
+                        <td>{{beneficiario.nome}}</td>
+                        <td>{{beneficiario.cpf}}</td>
+                        <td>{{beneficiario.email}}</td>
+                        <td>{{beneficiario.idade}}</td>
+                        <td> 
+                             <button class="btn btn-neutral" routerLink="/beneficiarios/form/{{beneficiario.id}}">
+                                <a><i class="fa fa-edit ml-2"></i></a>
+                            </button>
+                            <button class="btn btn-neutral" (click)="preparaBeneficiario(beneficiario)"
+                                data-toggle="modal" data-target="#modalDelecao">
+                                <i class="fa fa-trash ml-2"></i>
+                            </button>
+                        </td>
+
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <pagination [page]="page" (paginationEvent)=changePage($event)></pagination>
+    </div>
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+
+                <div class="modal-body"  *ngIf="beneficiarioSelecionado">
+                    Deseja exluir o beneficiário {{ beneficiarioSelecionado.nome }} ?
+                    
+                    <div class="modal-footer">
+                            <button class="btn btn-success" (click)="deletar()" data-dismiss="modal">Confirmar</button>
+                            <button class="btn btn-nutral" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </div>
+</div>

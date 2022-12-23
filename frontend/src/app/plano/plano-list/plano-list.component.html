@@ -1,0 +1,82 @@
+<h1 class="mt-4">Planos </h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-bitem active">Consulta</li>
+</ol>
+<div class="cotainer">
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="inputNome">Nome</label>
+                <input type="text" [(ngModel)]="nome" 
+                name="nome" id="inputNome"
+                class="form-control">
+            </div>
+
+        </div>
+        <br/>
+        <div class="row">
+           <div class="col-md-12">
+               <button type="submit" class="btn btn-default" (click)="buscar()">
+                   <i class="fa fa-search"></i>Consultar
+               </button>
+            <div class="col-md-11">
+               <button class="btn btn-warning" routerLink="/plano/form"><i class="fa fa-plus"></i>
+                Novo
+               </button>
+            </div>
+           </div>
+        </div>
+        <div id="modalDelecao" class="modal fade" role="dialog">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Confirmação</h4>
+                    </div>
+    
+                    <div class="modal-body"  *ngIf="planoSelecionado">
+                        Deseja exluir o plano {{ planoSelecionado.nome }} ?
+                        
+                        <div class="modal-footer">
+                                <button class="btn btn-success" (click)="deletar()" data-dismiss="modal">Confirmar</button>
+                                <button class="btn btn-nutral" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="alert alert-warning" role="alert" *ngIf="message">
+                {{ message }}
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover" >
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let plano of planos; let i = index;"> 
+                            <td>{{plano.nome}}</td>
+                            <td>{{plano.valor}}</td>
+                            <td> 
+                                <button  type="button" class="btn btn-neutral" routerLink="/plano/form/{{plano.id}}">
+                                   <a><i class="fa fa-edit ml-2"></i></a>
+                               </button>
+                               <button class="btn btn-neutral" (click)="preparaPlano(plano)"
+                                   data-toggle="modal" data-target="#modalDelecao">
+                                   <i class="fa fa-trash ml-2"></i>
+                               </button>
+                           </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+         </div>
+
+        
+    </form>
+</div>
