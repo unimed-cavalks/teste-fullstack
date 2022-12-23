@@ -1,0 +1,62 @@
+<h1 class="mt-4">Beneficiários</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">{{ beneficiario.id ? 'Edição' : 'Cadastro'}}</li>
+</ol>
+<div class="container">
+    <form #beneficiarioForm="ngForm" (ngSubmit)="onSubmit"> 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Beneficiário Salvo/Atualizado com sucesso!
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome: *</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="beneficiario.nome" name="nome" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>CPF: *</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="beneficiario.cpf" name="cpf" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>EMAIL: *</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="beneficiario.email" name="email" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>IDADE: *</label>
+                    <input type="text" class="form-control" 
+                    [(ngModel)]="beneficiario.idade" name="idade" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" (click)="onSubmit()" *ngIf="!beneficiario.id">
+                    <i class="fa fa-save"></i>Salvar
+                </button>
+                <button type="submit" class="btn btn-primary" (click)="onSubmit()" *ngIf="beneficiario.id">
+                    <i class="fa fa-sync-alt"></i>Atualizar
+                </button>
+
+                <button type="button" class="btn btn-danger ml-1" (click)="voltar()">
+                    <i class="fa fa-arrow-alt-circle-left"></i>Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
