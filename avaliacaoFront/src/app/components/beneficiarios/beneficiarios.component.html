@@ -1,0 +1,60 @@
+<h1>Lista de Beneficiários</h1>
+
+<!-- Botão para adicionar novo beneficiário -->
+<button pButton type="button" label="Adicionar Beneficiário" (click)="showDialogToAdd()"></button>
+
+<!-- Tabela para exibir os beneficiários -->
+<p-table [value]="beneficiarios">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>Email</th>
+      <th>Idade</th>
+      <th>Ações</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-beneficiario>
+    <tr>
+      <td>{{ beneficiario.Id }}</td>
+      <td>{{ beneficiario.Nome }}</td>
+      <td>{{ beneficiario.Cpf }}</td>
+      <td>{{ beneficiario.Email }}</td>
+      <td>{{ beneficiario.Idade }}</td>
+      <td>
+        <!-- Botões para editar e excluir beneficiários -->
+        <button pButton type="button" icon="pi pi-pencil" (click)="showDialogToUpdate(beneficiario)"></button>
+        <button pButton type="button" icon="pi pi-trash" (click)="deleteBeneficiario(beneficiario)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Diálogo para adicionar ou atualizar beneficiários -->
+<p-dialog header="Editar Beneficiário" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+  <div>
+    <div>
+      <label for="nome">Nome</label>
+      <input pInputText id="nome" [(ngModel)]="beneficiarioDialog.Nome"/>
+    </div>
+    <div>
+      <label for="cpf">CPF</label>
+      <input pInputText id="cpf" [(ngModel)]="beneficiarioDialog.Cpf"/>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input pInputText id="email" [(ngModel)]="beneficiarioDialog.Email"/>
+    </div>
+    <div>
+      <label for="idade">Idade</label>
+      <input pInputText id="idade" [(ngModel)]="beneficiarioDialog.Idade"/>
+    </div>
+  </div>
+  <footer>
+    <!-- Botões para salvar ou cancelar a edição -->
+    <button pButton type="button" label="Salvar" (click)="saveBeneficiario()"></button>
+    <button pButton type="button" label="Cancelar" (click)="cancel()"></button>
+  </footer>
+</p-dialog>
+
