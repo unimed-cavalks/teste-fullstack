@@ -1,0 +1,47 @@
+<h1>Lista de Planos</h1>
+
+<!-- Botão para adicionar novo plano -->
+<button pButton type="button" label="Adicionar Plano" (click)="showDialogToAdd()"></button>
+
+<!-- Tabela para exibir os planos -->
+<p-table [value]="planos">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Valor</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-plano>
+    <tr>
+      <td>{{ plano.Id }}</td>
+      <td>{{ plano.Nome }}</td>
+      <td>{{ plano.Valor }}</td>
+      <td>
+        <!-- Botões para editar e excluir planos -->
+        <button pButton type="button" icon="pi pi-pencil" (click)="showDialogToUpdate(plano)"></button>
+        <button pButton type="button" icon="pi pi-trash" (click)="deletePlano(plano)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- Diálogo para adicionar ou atualizar planos -->
+<p-dialog header="Editar Plano" [(visible)]="displayDialog" [modal]="true" [responsive]="true">
+  <div>
+    <div>
+      <label for="nome">Nome</label>
+      <input pInputText id="nome" [(ngModel)]="planoDialog.Nome"/>
+    </div>
+    <div>
+      <label for="valor">Valor</label>
+      <input pInputText id="valor" [(ngModel)]="planoDialog.Valor"/>
+    </div>
+  </div>
+  <footer>
+    <!-- Botões para salvar ou cancelar a edição -->
+    <button pButton type="button" label="Salvar" (click)="savePlano()"></button>
+    <button pButton type="button" label="Cancelar" (click)="cancel()"></button>
+  </footer>
+</p-dialog>
+
