@@ -1,0 +1,69 @@
+<h1 class="mt-4">Beneficiarios</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Lista</li>
+</ol>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="novoCadastro()">
+        <i class="fa fa-plus"></i> Novo
+      </button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Idade</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let beneficiario of beneficiarios">
+            <td>{{ beneficiario.id }}</td>
+            <td>{{ beneficiario.nome }}</td>
+            <td>{{ beneficiario.cpf }}</td>
+            <td>{{ beneficiario.email }}</td>
+            <td>{{ beneficiario.idade }}</td>
+            <td>
+              <button class="btn btn-primary" routerLink="/beneficiarios-form/{{ beneficiario.id }}">
+                <i class="fa fa-pen"></i>
+              </button>
+
+              <button class="btn btn-danger" (click)="preparaDelecao(beneficiario)"
+                data-toggle="modal" data-target="#modalDelecao">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="modalDelecao" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>Confirmação</h4>
+        </div>
+
+        <div class="modal-body" *ngIf="beneficiarioSelecionado">
+          Confirma deletar o Beneficiario: {{ beneficiarioSelecionado.nome }} ?
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" (click)="deletarBeneficiario()" data-dismiss="modal">Confirma</button>
+          <button class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
